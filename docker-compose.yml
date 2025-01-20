@@ -1,0 +1,23 @@
+services:
+  database:
+    image: bitnami/postgresql:14
+    container_name: db
+    volumes:
+      - psql_volume:/var/lib/psql/data
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - 5432:5432
+  api:
+    image: ecommerce
+    container_name: api
+    ports:
+      - 5000:5000
+    depends_on:
+      - database
+volumes:
+  psql_volume:
