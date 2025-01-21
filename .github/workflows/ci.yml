@@ -33,17 +33,17 @@ jobs:
     - name: Check linting with ruff
       working-directory: ./api
       run: |
-        ruff check boss_tracker
+        ruff check ecommerce
 
     - name: Check code formatting with black
       working-directory: ./api
       run: |
-        black --check boss_tracker
+        black --check ecommerce
 
     - name: Check typing with mypy
       working-directory: ./api
       run: |
-        mypy boss_tracker
+        mypy ecommerce
         
     - name: Setup testing database 
       working-directory: ./api
