@@ -6,6 +6,10 @@ COPY /api/requirements.txt .
 
 RUN pip install -r requirements.txt
 
+COPY /api/requirements-dev.txt .
+
+RUN pip install -r requirements-dev.txt
+
 COPY /api .
 
 EXPOSE 5000
