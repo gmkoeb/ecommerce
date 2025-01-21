@@ -45,10 +45,6 @@ jobs:
       run: |
         mypy ecommerce
         
-    - name: Setup testing database 
-      working-directory: ./api
-      run: |
-        make setup_test_db
     - name: Test with pytest
       working-directory: ./api
       run: |
