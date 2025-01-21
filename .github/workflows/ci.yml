@@ -25,26 +25,32 @@ jobs:
         python-version: "3.10"
 
     - name: Install dependencies
+      working-directory: ./api
       run: |
         pip install -r requirements.txt
         pip install -r requirements-dev.txt
 
     - name: Check linting with ruff
+      working-directory: ./api
       run: |
         ruff check boss_tracker
 
     - name: Check code formatting with black
+      working-directory: ./api
       run: |
         black --check boss_tracker
 
     - name: Check typing with mypy
+      working-directory: ./api
       run: |
         mypy boss_tracker
         
     - name: Setup testing database 
+      working-directory: ./api
       run: |
         make setup_test_db
     - name: Test with pytest
+      working-directory: ./api
       run: |
         pytest
         
