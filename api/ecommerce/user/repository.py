@@ -20,8 +20,7 @@ class UsersRepository:
             return new_user
         except Exception as e:
             self.__db.rollback()
-            print(f"Error creating user: {e}")
-            return None
+            raise e
 
     def list_users(self) -> list[User]:
         """List all registered users"""
