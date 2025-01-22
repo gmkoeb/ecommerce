@@ -1,5 +1,4 @@
-import os
-from ecommerce.user.repository.users_repository import UsersRepository
+from ecommerce.user.repository import UsersRepository
 
 class TestUsersRepository:
     def test_create_user(self, test_db):
