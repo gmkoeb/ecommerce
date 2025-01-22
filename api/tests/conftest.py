@@ -17,3 +17,11 @@ def test_db():
     finally:
         db.close()
         Base.metadata.drop_all(bind=engine)
+
+@pytest.fixture()
+def users_service(test_db):
+    from ecommerce.user.repository import UsersRepository
+    from ecommerce.user.app import UsersService
+    repository = UsersRepository(db=test_db)
+    users_test_service=UsersService(repository=repository)
+    yield users_test_service
