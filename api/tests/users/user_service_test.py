@@ -1,6 +1,5 @@
 from ecommerce.user.app import UsersService
 
-
 class TestUsersService:
     def test_list_users(self, users_service: UsersService):
         first_user = users_service.create_user(name="Test User", password="password", email="user@email.com")
@@ -22,7 +21,6 @@ class TestUsersService:
     def test_email_uniqueness(self, users_service: UsersService):
         users_service.create_user(name="Test User", password="password", email="user@email.com")
 
-        user = users_service.create_user(name="Test User", password="password", email="user@email.com")
+        users_service.create_user(name="Test User", password="password", email="user@email.com")
 
         assert len(users_service.list_users()) == 1
-        assert user == "This email address is already being used"

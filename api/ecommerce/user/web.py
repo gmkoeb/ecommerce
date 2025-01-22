@@ -1,23 +1,24 @@
 """Users routes"""
 
-
 from flask import Blueprint, jsonify, request
 
 from ecommerce.user.app import UsersService
-from ecommerce.user.repository import UsersRepository
 from ecommerce.database.database import SessionLocal
+
 bp = Blueprint("users", __name__)
 
-service = UsersService(repository=UsersRepository(db=SessionLocal()))
+db = SessionLocal()
+service = UsersService(db=db)
 
-@bp.route("/sign_up", methods=('POST'))
+@bp.route("/sign_up", methods=(['POST']))
 def create():
-    name = request.form['name']
-    password = request.form['password']
-    email = request.form['email']
+    user_data = request.json["user"]
+    name = user_data["name"]
+    password = user_data['password']
+    email = user_data['email']
+    user = service.create_user(name=name, password=password, email=email)   
+    if len(user.errors) > 0:
+        return {"errors": user.errors}, 400
+    else:
+        return {"user": user.to_dict()}, 201
 
-    try:
-        user = service.create_user(name=name, password=password, email=email)        
-        return jsonify(user), 201
-    except Exception as e:
-        return jsonify({"error": f"An error occurred while creating user: {e}"})

@@ -20,6 +20,9 @@ class UsersRepository:
             return new_user
         except Exception as e:
             self.__db.rollback()
+            if "users.email" in str(e).lower():
+                new_user.errors.append("Email already in use")
+                return new_user
             raise e
 
     def list_users(self) -> list[User]:
