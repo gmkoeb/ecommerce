@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 from datetime import datetime, timedelta, timezone
 import os
 
+
 class UsersService:
     def __init__(self, db) -> None:
         self.__repository = UsersRepository(db=db)
@@ -33,13 +34,10 @@ class UsersService:
     def generate_jwt(self, user_id: int) -> str:
         load_dotenv()
         expiration_time = datetime.now(timezone.utc) + timedelta(days=1)
-        payload = {
-            "user_id": user_id,
-            "exp": expiration_time 
-        }
+        payload = {"user_id": user_id, "exp": expiration_time}
         token = jwt.encode(payload, os.getenv("JWT_SECRET"), algorithm="HS256")
         return token
-    
+
     def decode_jwt(self, token: str) -> dict:
         load_dotenv()
         decoded = jwt.decode(token, os.getenv("JWT_SECRET"), algorithms=["HS256"])
@@ -47,4 +45,3 @@ class UsersService:
 
     def __hash_password(self, password: str):
         return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
-            

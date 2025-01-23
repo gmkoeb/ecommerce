@@ -30,5 +30,5 @@ class UsersRepository:
 
     def find_user_by_email(self, email: str) -> User | None:
         """Finds and returns an User by email"""
-        user = self.__db.query(User).filter_by(email = email).first()
+        user = self.__db.query(User).filter_by(email=email).first()
         return user
