@@ -5,6 +5,7 @@ from sqlalchemy.orm import sessionmaker
 
 if os.environ.get("FLASK_ENV") == "test":
     from ecommerce.database.base import Base
+
     engine = create_engine("sqlite:///:memory:")
     SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
     Base.metadata.create_all(engine)

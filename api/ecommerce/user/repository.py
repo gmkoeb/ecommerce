@@ -7,9 +7,7 @@ class UsersRepository:
     def __init__(self, db):
         self.__db = db
 
-    def create_user(
-        self, name: str = "", email: str = "", password: str = ""
-    ) -> User | None:
+    def create_user(self, name: str = "", email: str = "", password: str = "") -> User:
         """Inserts a user into the database"""
         new_user = User(name=name, email=email, password=password)
 

@@ -11,15 +11,15 @@ class User(Base):
     email = Column(String, unique=True)
     password = Column(String)
 
-    def __init__(self,*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.errors = []
 
-    def to_dict(self) -> dict [str, str | int]:
+    def to_dict(self) -> dict[str, str]:
         """Converts an User instance into a dictionary"""
         return {
-            "id": self.id,
-            "name": self.name,
-            "email": self.email,
-            "password": str(self.password)
+            "id": str(self.id),
+            "name": str(self.name),
+            "email": str(self.email),
+            "password": str(self.password),
         }
