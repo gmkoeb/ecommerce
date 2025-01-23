@@ -1,15 +1,16 @@
 import pytest
 import os
 
-@pytest.fixture(autouse=True)
-def set_env():
-    os.environ["FLASK_ENV"] = "test"
+os.environ["FLASK_ENV"] = "test"
 
 @pytest.fixture(scope="function")
 def test_db():
     from ecommerce.database.base import Base
-    from ecommerce.database.database import SessionLocal
-    from ecommerce.database.database import engine
+    from sqlalchemy.orm import sessionmaker
+    from sqlalchemy import create_engine
+
+    engine = create_engine("sqlite:///:memory:")
+    SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
     db = SessionLocal()
     Base.metadata.create_all(engine)
     try: 
@@ -17,3 +18,15 @@ def test_db():
     finally:
         db.close()
         Base.metadata.drop_all(bind=engine)
+
+@pytest.fixture()
+def users_service(test_db):
+    from ecommerce.user.app import UsersService
+    users_test_service=UsersService(db=test_db)
+    yield users_test_service
+
+@pytest.fixture()
+def client(test_db):
+    from ecommerce import app
+    with app.test_client() as client:
+        yield client

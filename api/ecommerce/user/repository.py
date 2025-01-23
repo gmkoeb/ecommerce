@@ -7,9 +7,7 @@ class UsersRepository:
     def __init__(self, db):
         self.__db = db
 
-    def create_user(
-        self, name: str = "", email: str = "", password: str = ""
-    ) -> User | None:
+    def create_user(self, name: str = "", email: str = "", password: str = "") -> User:
         """Inserts a user into the database"""
         new_user = User(name=name, email=email, password=password)
 
@@ -20,8 +18,10 @@ class UsersRepository:
             return new_user
         except Exception as e:
             self.__db.rollback()
-            print(f"Error creating user: {e}")
-            return None
+            if "users.email" in str(e).lower():
+                new_user.errors.append("Email already in use")
+                return new_user
+            raise e
 
     def list_users(self) -> list[User]:
         """List all registered users"""
