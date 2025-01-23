@@ -29,4 +29,5 @@ def users_service(test_db):
 def client(test_db):
     from ecommerce import app
     with app.test_client() as client:
+        app.config["DB_SESSION"] = test_db
         yield client
