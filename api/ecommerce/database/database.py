@@ -3,6 +3,8 @@ from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+load_dotenv()
+
 if os.environ.get("FLASK_ENV") == "test":
     from ecommerce.database.base import Base
 
