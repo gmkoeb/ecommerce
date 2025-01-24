@@ -13,11 +13,17 @@ services:
     ports:
       - 5432:5432
   api:
-    image: ecommerce
+    image: ecommerce/api
     container_name: api
     ports:
       - 5000:5000
     depends_on:
       - database
+  web:
+    image: ecommerce/web
+    container_name: web
+    ports:
+      - 3000:3000
+      
 volumes:
   psql_volume:
