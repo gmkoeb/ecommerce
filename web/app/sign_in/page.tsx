@@ -2,6 +2,7 @@
 import { ErrorMessage, Field, Form, Formik, FormikErrors, FormikHelpers } from "formik";
 import { api } from "../lib/axios";
 import { AxiosResponse } from "axios";
+import { useState } from "react";
 
 interface SignInFormValues {
   email: string,
@@ -9,6 +10,7 @@ interface SignInFormValues {
 }
 
 export default function SignUp() {
+  const [authenticationError, setAuthenticationError] = useState('')
   const initialValues: SignInFormValues = {
     email: '',
     password: ''
@@ -27,7 +29,7 @@ export default function SignUp() {
       console.log(response)
       actions.setSubmitting(false)
     } catch (error: any) {
-      console.log(error.response.data.error)
+      setAuthenticationError(error.response.data.error)
     }
   }
 
@@ -87,7 +89,9 @@ export default function SignUp() {
                 placeholder="Type your password...">
               </Field>
             </div>
-            
+            <div>
+              <p className="text-red-500 font-bold">{authenticationError}</p>
+            </div>
             <button className="w-1/2 bg-blue-500 text-white py-2 rounded-full text-lg" type="submit">Sign In</button>
           </Form>
         )}
