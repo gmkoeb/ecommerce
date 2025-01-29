@@ -3,13 +3,23 @@ import { ErrorMessage, Field, Form, Formik, FormikErrors, FormikHelpers } from "
 import { api } from "../lib/axios";
 import { AxiosResponse } from "axios";
 import { useState } from "react";
+import { useRouter } from 'next/navigation'
+import Cookies from 'js-cookie'
 
 interface SignInFormValues {
   email: string,
   password: string,
 }
 
+interface ApiResponse {
+  user: {
+    name: string;
+    token: string;
+  };
+}
+
 export default function SignUp() {
+  const router = useRouter()
   const [authenticationError, setAuthenticationError] = useState('')
   const initialValues: SignInFormValues = {
     email: '',
@@ -25,9 +35,12 @@ export default function SignUp() {
         }
 
       }
-      const response = await api.post<AxiosResponse>('/sign_in', userData)
-      console.log(response)
+      const response = await api.post<ApiResponse>('/sign_in', userData)
+      console.log(response.data.user)
       actions.setSubmitting(false)
+      Cookies.set('userName', response.data.user.name)
+      Cookies.set('token', response.data.user.token)
+      router.push('/')
     } catch (error: any) {
       setAuthenticationError(error.response.data.error)
     }
