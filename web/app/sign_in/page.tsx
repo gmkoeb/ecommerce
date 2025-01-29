@@ -35,7 +35,7 @@ export default function SignUp() {
 
   return(
     <div className="grid grid-cols-2 w-full">
-      <img src="signincover.jpeg" alt="Cartoon picture of things related to shopping" className="h-[94vh] mt-2 rounded-lg ml-10"/>
+      <img src="signincover.jpeg" alt="Cartoon picture of things related to shopping" className="h-[98vh] mt-2 rounded-lg ml-10"/>
       <Formik
         initialValues={initialValues}
         onSubmit={(values, actions) => handleSubmit(values, actions)}
