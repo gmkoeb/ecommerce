@@ -28,7 +28,7 @@ function SimpleSlider() {
   }
   
   const settings = {
-    dots: false,
+    dots: true,
     speed: 500,
     autoplay: true,
     autoplaySpeed: 10000,

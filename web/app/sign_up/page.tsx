@@ -1,6 +1,6 @@
 'use client'
 import { ErrorMessage, Field, Form, Formik, FormikErrors, FormikHelpers } from "formik";
-import { api } from "../lib/axios";
+import { api } from "../../lib/axios";
 import { AxiosResponse } from "axios";
 
 interface SignUpFormValues {
@@ -39,7 +39,7 @@ export default function SignUp() {
 
   return(
     <div className="grid grid-cols-2 w-full">
-      <img src="signupcover.jpeg" alt="Cartoon picture of bags and products" className="h-[98vh] mt-2 rounded-lg ml-10"/>
+      <img src="signupcover.jpeg" alt="Cartoon picture of bags and products" className="h-[90vh] mt-2 rounded-lg ml-10"/>
       <Formik
         initialValues={initialValues}
         onSubmit={(values, actions) => handleSubmit(values, actions)}
