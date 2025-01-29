@@ -1,6 +1,6 @@
 services:
   database:
-    image: bitnami/postgresql:14
+    image: postgres:17
     container_name: db
     volumes:
       - psql_volume:/var/lib/psql/data

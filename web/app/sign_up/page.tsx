@@ -2,7 +2,6 @@
 import { ErrorMessage, Field, Form, Formik, FormikErrors, FormikHelpers } from "formik";
 import { api } from "../lib/axios";
 import { AxiosResponse } from "axios";
-import { useState } from "react";
 
 interface SignUpFormValues {
   name: string,
@@ -39,8 +38,8 @@ export default function SignUp() {
   }
 
   return(
-    <div className="grid grid-cols-2">
-      <img src="signupcover.jpeg" alt="Supermarket cart" className="h-[98vh] mt-2 rounded-lg ml-10 w-[75%]"/>
+    <div className="grid grid-cols-2 w-full">
+      <img src="signupcover.jpeg" alt="Cartoon picture of bags and products" className="h-[98vh] mt-2 rounded-lg ml-10"/>
       <Formik
         initialValues={initialValues}
         onSubmit={(values, actions) => handleSubmit(values, actions)}
@@ -70,7 +69,7 @@ export default function SignUp() {
         {({ errors, touched }) => (
           <Form className="flex flex-col mt-20 justify-center gap-6 text-left ml-40">
             <h1 className="text-5xl text-left font-bold">Sign up</h1>
-            <div className="w-96 flex flex-col">
+            <div className="w-1/2 flex flex-col">
               <div className="flex justify-between">
                 <label htmlFor="name">Name</label>
                 <ErrorMessage className="text-red-500 font-bold" name="name" component={'div'}></ErrorMessage>
@@ -87,7 +86,7 @@ export default function SignUp() {
                 placeholder="Type your name...">
               </Field>
             </div>
-            <div className="w-96 flex flex-col">
+            <div className="w-1/2 flex flex-col">
               <div className="flex justify-between">
                 <label htmlFor="email">Email</label>
                 <ErrorMessage className="text-red-500 font-bold" name="email" component={'div'}></ErrorMessage>
@@ -105,7 +104,7 @@ export default function SignUp() {
 
               </Field>
             </div>
-            <div className="w-96 flex flex-col">
+            <div className="w-1/2 flex flex-col">
               <div className="flex justify-between">
                 <label htmlFor="password">Password</label>
                 <ErrorMessage className="text-red-500 font-bold" name="password" component={'div'}></ErrorMessage>
@@ -121,7 +120,7 @@ export default function SignUp() {
                 placeholder="Type your password...">
               </Field>
             </div>
-            <div className="w-96 flex flex-col">
+            <div className="w-1/2 flex flex-col">
               <div className="flex justify-between">
                 <label htmlFor="confirm_password">Confirm Password</label>
                 <ErrorMessage className="text-red-500 font-bold text-center" name="confirm_password" component={'div'}></ErrorMessage>
@@ -137,7 +136,7 @@ export default function SignUp() {
                 placeholder="Confirm Password">
               </Field>
             </div>
-            <button className="w-96 bg-blue-500 text-white py-2 rounded-full text-lg" type="submit">Sign Up</button>
+            <button className="w-1/2 bg-blue-500 text-white py-2 rounded-full text-lg" type="submit">Sign Up</button>
           </Form>
         )}
       </Formik>
