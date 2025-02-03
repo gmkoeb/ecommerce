@@ -31,7 +31,7 @@ function SimpleSlider() {
     dots: true,
     speed: 500,
     autoplay: true,
-    autoplaySpeed: 10000,
+    autoplaySpeed: 5000,
     slidesToShow: 1,
     slidesToScroll: 1,
     swipe: false,
@@ -39,13 +39,13 @@ function SimpleSlider() {
     prevArrow: <SamplePrevArrow />
   };
 
-  const sliderArray = [1, 2, 3]
+  const sliderArray = ["apple", "headphones", "notebooks"]
   return (
     <div className="slider-container mt-10 mx-auto w-1/2">
       <Slider {...settings}>
         {sliderArray.map(value => (
           <div key={value}>
-            <img className="w-full h-96 mx-auto rounded-lg" src={`sliderImages/slider${value}.jpeg`} alt="" />
+            <img className="w-full h-96 mx-auto rounded-lg shadow-md" src={`sliderImages/${value}.jpeg`} alt={`${value} products`} />
           </div>
         ))}
       </Slider>

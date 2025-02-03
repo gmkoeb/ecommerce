@@ -1,7 +1,7 @@
 'use client'
 import { ErrorMessage, Field, Form, Formik, FormikErrors, FormikHelpers } from "formik";
 import { api } from "../../lib/axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
 import Link from 'next/link'
@@ -40,12 +40,17 @@ export default function SignUp() {
       actions.setSubmitting(false)
       Cookies.set('userName', response.data.user.name)
       Cookies.set('token', response.data.user.token)
-      router.push('/')
+      router.refresh()
+      location.reload()
     } catch (error: any) {
       setAuthenticationError(error.response.data.error)
     }
   }
-
+  useEffect(() => {
+    if (Cookies.get('userName')){
+      router.push('/')
+    }
+  })
   return(
     <div className="grid grid-cols-2 w-full">
       <div className="flex">
