@@ -39,9 +39,9 @@ function SimpleSlider() {
     prevArrow: <SamplePrevArrow />
   };
 
-  const sliderArray = [1, 2, 3, 4, 5]
+  const sliderArray = [1, 2, 3]
   return (
-    <div className="slider-container mt-10 mx-auto w-[70%]">
+    <div className="slider-container mt-10 mx-auto w-1/2">
       <Slider {...settings}>
         {sliderArray.map(value => (
           <div key={value}>
