@@ -3,6 +3,7 @@ import os
 
 os.environ["FLASK_ENV"] = "test"
 
+
 @pytest.fixture(scope="function")
 def test_db():
     from ecommerce.database.base import Base
@@ -13,21 +14,25 @@ def test_db():
     SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
     db = SessionLocal()
     Base.metadata.create_all(engine)
-    try: 
+    try:
         yield db
     finally:
         db.close()
         Base.metadata.drop_all(bind=engine)
 
+
 @pytest.fixture()
 def users_service(test_db):
     from ecommerce.user.app import UsersService
-    users_test_service=UsersService(db=test_db)
+
+    users_test_service = UsersService(db=test_db)
     yield users_test_service
+
 
 @pytest.fixture()
 def client(test_db):
     from ecommerce import app
+
     with app.test_client() as client:
         app.config["DB_SESSION"] = test_db
         yield client
