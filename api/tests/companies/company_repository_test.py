@@ -2,6 +2,19 @@ from ecommerce.company.repository import CompaniesRepository
 
 
 class TestCompanyClass:
+    def test_create_company_success(self, test_db):
+        companies_repository = CompaniesRepository(db=test_db)
+
+        company = companies_repository.create_company(corporate_name='Razer Unlimited', brand_name='Razer', 
+                                                      full_address='Test street, 3903.', city='Test City', 
+                                                      state='Test State', email='email@test.com', 
+                                                      registration_number='123456789')
+
+        assert company.errors == []
+        assert company.corporate_name == 'Razer Unlimited'
+        assert company.brand_name == 'Razer'
+        assert company.full_address == 'Test street, 3903.'
+        
     def test_corporate_name_cant_be_blank(self, test_db):
         companies_repository = CompaniesRepository(db=test_db)
 
@@ -79,5 +92,22 @@ class TestCompanyClass:
                                                         full_address='Test street, 3903.', city='Test', 
                                                         state='Test State', email='email@email.com', 
                                                         registration_number='')
-
+    
         assert "Registration number can't be blank." in company.errors
+
+    def test_list_companies(self, test_db):
+        companies_repository = CompaniesRepository(db=test_db)
+        
+        first_company = companies_repository.create_company(corporate_name='Apple Inc', brand_name='Apple', 
+                                                            full_address='Test street, 3903.', city='Test City', 
+                                                            state='Test State', email='email2@test.com', 
+                                                            registration_number='1452313910')
+        second_company = companies_repository.create_company(corporate_name='Razer Unlimited', brand_name='Razer', 
+                                                            full_address='Test street, 3903.', city='Test City', 
+                                                            state='Test State', email='email@test.com', 
+                                                            registration_number='123456789')
+
+        companies = companies_repository.list_companies()
+
+        assert len(companies) == 2
+        assert companies == [first_company, second_company]

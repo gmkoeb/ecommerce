@@ -1,11 +1,12 @@
 """Repository for Companies"""
 
 from ecommerce.company import Company
+from sqlalchemy.orm import Session
 import re
 
 
 class CompaniesRepository:
-    def __init__(self, db):
+    def __init__(self, db: Session):
         self.__db = db
 
     def create_company(
@@ -17,7 +18,7 @@ class CompaniesRepository:
         state: str = "",
         email: str = "",
         registration_number: str = "",
-    ):
+    ) -> Company:
         new_company = Company(
             corporate_name=corporate_name,
             brand_name=brand_name,
@@ -44,7 +45,11 @@ class CompaniesRepository:
                     return new_company
                 print(e)
 
-    def __validate_company(self, company: Company):
+    def list_companies(self) -> list[Company]:
+        companies = self.__db.query(Company).all()
+        return companies
+    
+    def __validate_company(self, company: Company) -> list:
         email_validate_pattern = r"[^@]+@[^@]+\.[^@]+"
         errors = []
         for field, error_message in company.required_fields.items():
