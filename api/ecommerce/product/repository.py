@@ -20,7 +20,11 @@ class ProductsRepository():
                 return new_product
             except Exception as e:
                 self.__db.rollback()
-                
+
+    def list_products(self):
+        products = self.__db.query(Product).all()
+        return products
+     
     def __validate_product(self, product: Product) -> list:
         errors = []
         for field, error_message in product.required_fields.items():
