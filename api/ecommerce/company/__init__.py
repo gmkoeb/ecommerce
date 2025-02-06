@@ -2,7 +2,7 @@
 
 from sqlalchemy import Column, Integer, String
 from ecommerce.database.base import Base
-
+from sqlalchemy.orm import relationship
 
 class Company(Base):
     __tablename__ = "companies"
@@ -14,6 +14,7 @@ class Company(Base):
     state = Column(String, nullable=False)
     email = Column(String, nullable=False, unique=True)
     registration_number = Column(Integer, nullable=False, unique=True)
+    products = relationship("Product", back_populates="company", cascade="all, delete")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
