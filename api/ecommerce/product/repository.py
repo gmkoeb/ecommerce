@@ -21,10 +21,14 @@ class ProductsRepository():
             except Exception as e:
                 self.__db.rollback()
 
-    def list_products(self):
+    def list_products(self) -> list[Product]:
         products = self.__db.query(Product).all()
         return products
-     
+    
+    def list_categories(self):
+        categories = self.__db.query(Product.category).distinct().all()
+        return [category[0] for category in categories]
+    
     def __validate_product(self, product: Product) -> list:
         errors = []
         for field, error_message in product.required_fields.items():
@@ -37,3 +41,4 @@ class ProductsRepository():
                     errors.append(error_message)
 
         return errors
+    

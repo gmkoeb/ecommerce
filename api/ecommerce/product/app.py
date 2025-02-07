@@ -6,5 +6,8 @@ class ProductsService:
         self.__repository = ProductsRepository(db=db)
     
 
-    def list_all(self):
+    def list_products(self):
         return self.__repository.list_products()
+    
+    def list_categories(self):
+        return self.__repository.list_categories()
