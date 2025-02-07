@@ -1,17 +1,18 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
 from ecommerce.database.base import Base
 from sqlalchemy.orm import relationship
-from ecommerce.company import Company
+from ecommerce.company import Company as Company
+
 
 class Product(Base):
     __tablename__ = "products"
-    id = Column(Integer, primary_key = True, index = True)
+    id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
     category = Column(String, nullable=False)
     price = Column(Integer, nullable=False)
     model = Column(String)
     description = Column(String)
-    
+
     company_id = Column(Integer, ForeignKey("companies.id", ondelete="CASCADE"))
     company = relationship("Company", back_populates="products")
 
@@ -23,7 +24,7 @@ class Product(Base):
             "category": "Category can't be blank.",
             "price": "Price can't be blank.",
         }
-    
+
     def to_dict(self) -> dict[str, str]:
         """Converts an Product instance into a dictionary"""
         return {

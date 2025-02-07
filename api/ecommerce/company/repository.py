@@ -43,12 +43,12 @@ class CompaniesRepository:
                 if "companies.email" in str(e).lower():
                     new_company.errors.append("Email already in use")
                     return new_company
-                print(e)
+                raise e
 
     def list_companies(self) -> list[Company]:
         companies = self.__db.query(Company).all()
         return companies
-    
+
     def __validate_company(self, company: Company) -> list:
         email_validate_pattern = r"[^@]+@[^@]+\.[^@]+"
         errors = []
