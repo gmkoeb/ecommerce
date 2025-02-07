@@ -19,3 +19,14 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+.slick-track{
+  display: flex !important;
+  gap: 0.5rem !important;
+}
+
+.slick-next, .slick-prev{
+  height: 40px !important;
+  width: 40px !important;
+}
