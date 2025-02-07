@@ -28,7 +28,13 @@ def users_service(test_db):
     users_test_service = UsersService(db=test_db)
     yield users_test_service
 
+@pytest.fixture()
+def products_service(test_db):
+    from ecommerce.product.app import ProductsService
 
+    products_test_service = ProductsService(db=test_db)
+    yield products_test_service
+    
 @pytest.fixture()
 def client(test_db):
     from ecommerce import app

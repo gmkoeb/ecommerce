@@ -11,7 +11,9 @@ class TestProductsRepository():
                                                         full_address='Test street, 3903.', city='Test City', 
                                                         state='Test State', email='email@test.com', 
                                                         registration_number='123456789')
-        product = products_repository.create_product(company_id=company.id, name="Gaming Keyboard", category="Keyboards", price=1000, model="Razer Bla", description="Gaming keyboard for games")
+        product = products_repository.create_product(company_id=company.id, name="Gaming Keyboard", 
+                                                     category="Keyboards", price=1000, model="Razer Bla", 
+                                                     description="Gaming keyboard for games")
 
         assert product.errors == []
         assert product.company_id == 1
@@ -24,7 +26,9 @@ class TestProductsRepository():
                                                         full_address='Test street, 3903.', city='Test City', 
                                                         state='Test State', email='email@test.com', 
                                                         registration_number='123456789')
-        product = products_repository.create_product(company_id=company.id, name="", category="Keyboards", price=1000, model="Razer Bla", description="Gaming keyboard for games")
+        product = products_repository.create_product(company_id=company.id, name="", category="Keyboards", 
+                                                     price=1000, model="Razer Bla", 
+                                                     description="Gaming keyboard for games")
 
         assert "Name can't be blank." in product.errors
 
@@ -36,7 +40,9 @@ class TestProductsRepository():
                                                         full_address='Test street, 3903.', city='Test City', 
                                                         state='Test State', email='email@test.com', 
                                                         registration_number='123456789')
-        product = products_repository.create_product(company_id=company.id, name="Razer Keyboard", category="", price=1000, model="Razer Bla", description="Gaming keyboard for games")
+        product = products_repository.create_product(company_id=company.id, name="Razer Keyboard", 
+                                                     category="", price=1000, model="Razer Bla", 
+                                                     description="Gaming keyboard for games")
 
         assert "Category can't be blank." in product.errors
 
@@ -48,7 +54,9 @@ class TestProductsRepository():
                                                         full_address='Test street, 3903.', city='Test City', 
                                                         state='Test State', email='email@test.com', 
                                                         registration_number='123456789')
-        product = products_repository.create_product(company_id=company.id, name="Razer Keyboard", category="Keyboards", price=0, model="Razer Bla", description="Gaming keyboard for games")
+        product = products_repository.create_product(company_id=company.id, name="Razer Keyboard", 
+                                                     category="Keyboards", price=0, model="Razer Bla", 
+                                                     description="Gaming keyboard for games")
 
         assert "Price can't be blank." in product.errors
     
@@ -60,8 +68,12 @@ class TestProductsRepository():
                                                         full_address='Test street, 3903.', city='Test City', 
                                                         state='Test State', email='email@test.com', 
                                                         registration_number='123456789')
-        first_product = products_repository.create_product(company_id=company.id, name="Razer Keyboard", category="Keyboards", price=2000, model="Razer Bla 2", description="Gaming keyboard for games")
-        second_product = products_repository.create_product(company_id=company.id, name="Razer Keyboard", category="Keyboards", price=1000, model="Razer Bla", description="Gaming keyboard for games")
+        first_product = products_repository.create_product(company_id=company.id, name="Razer Keyboard", 
+                                                           category="Keyboards", price=2000, model="Razer Bla 2", 
+                                                           description="Gaming keyboard for games")
+        second_product = products_repository.create_product(company_id=company.id, name="Razer Keyboard", 
+                                                            category="Keyboards", price=1000, model="Razer Bla", 
+                                                            description="Gaming keyboard for games")
 
         products = products_repository.list_products()
         
