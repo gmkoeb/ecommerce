@@ -3,7 +3,7 @@ services:
     image: postgres:17
     container_name: db
     volumes:
-      - psql_volume:/var/lib/psql/data
+      - psql_volume:/var/lib/postgresql/data
     env_file:
       - .env
     environment:

@@ -1,10 +1,10 @@
 """Repository for Users"""
 
 from ecommerce.user import User
-
+from sqlalchemy.orm import Session
 
 class UsersRepository:
-    def __init__(self, db):
+    def __init__(self, db: Session):
         self.__db = db
 
     def create_user(self, name: str = "", email: str = "", password: str = "") -> User:

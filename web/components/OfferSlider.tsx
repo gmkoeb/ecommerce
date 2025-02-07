@@ -1,10 +1,9 @@
 'use client'
-import React, { useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-function SimpleSlider() {
+function OfferSlider() {
   function SampleNextArrow(props: any) {
     const { className, style, onClick } = props;
     return (
@@ -53,4 +52,4 @@ function SimpleSlider() {
   );
 }
 
-export default SimpleSlider;
+export default OfferSlider;

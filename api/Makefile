@@ -7,4 +7,7 @@ ruff:
 black: 
 	black ecommerce
 
+seed:
+	python -m ecommerce.database.seeds.db_seed
+
 lint: black ruff mypy
