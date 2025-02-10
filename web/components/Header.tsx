@@ -3,13 +3,23 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Cookies from 'js-cookie'
 import Cart from "./Cart";
-import { ChevronDown, ShoppingBasket } from "lucide-react";
+import { ShoppingBasket } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { useRouter } from "next/navigation";
 
 export default function Header(){
+  const router = useRouter()
   const [userName, setUsername] = useState('')
   const { cartCounter } = useCart()
   const [cartClicked, setCartClicked] = useState<boolean>(false)
+  
+  async function handleLogout(){
+    Cookies.remove('token')
+    Cookies.remove('userName')
+    router.refresh()
+    location.reload()
+  }
+
   useEffect(() => {
     const name = Cookies.get('userName')
     if (name){
@@ -20,18 +30,19 @@ export default function Header(){
         setUsername(name)
       }
     }
-
   }, [])
+
   return(
     <header className="pb-10">
-      <nav className="flex justify-between py-4 bg-violet-600 items-center text-neutral-200 fixed w-full z-20">
+      <nav className="flex justify-between py-4 bg-violet-600 text-neutral-200 fixed w-full z-20 items-center">
         <Link href={'/'} className="font-bold text-3xl mx-10">Ecommerce<span className="text-lg">.com.br</span></Link>
         <input type="text" className="w-3/4 rounded-lg py-2 px-4" placeholder="Search Ecommerce.com.br" />
         <div className="flex gap-4 mr-4 items-center">
           {userName ? 
-            <>
-              <h5 className="text-center font-bold">{userName}</h5> 
-            </>
+            <div className="flex flex-col ml-5">
+              <h5 className="text-center font-bold w-32">{userName}</h5>
+              <button className="hover:underline" onClick={() => handleLogout()}>Logout</button>
+            </div>
           :
             <>
               <Link className="p-2 rounded-lg text-md hover:opacity-80 duration-300 text-center font-bold" href={'/sign_in'}>Sign in to your account</Link>
