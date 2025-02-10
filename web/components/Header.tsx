@@ -3,10 +3,13 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Cookies from 'js-cookie'
 import Cart from "./Cart";
+import { ChevronDown, ShoppingBasket } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 
 export default function Header(){
   const [userName, setUsername] = useState('')
-
+  const { cartCounter } = useCart()
+  const [cartClicked, setCartClicked] = useState<boolean>(false)
   useEffect(() => {
     const name = Cookies.get('userName')
     if (name){
@@ -21,20 +24,30 @@ export default function Header(){
   }, [])
   return(
     <header className="pb-10">
-      <nav className="flex justify-between py-4 bg-violet-600 font-bold items-center text-neutral-200 fixed w-full z-20">
+      <nav className="flex justify-between py-4 bg-violet-600 items-center text-neutral-200 fixed w-full z-20">
         <Link href={'/'} className="font-bold text-3xl mx-10">Ecommerce<span className="text-lg">.com.br</span></Link>
         <input type="text" className="w-3/4 rounded-lg py-2 px-4" placeholder="Search Ecommerce.com.br" />
         <div className="flex gap-4 mr-4 items-center">
           {userName ? 
             <>
-              <h5 className="text-center">{userName}</h5> 
+              <h5 className="text-center font-bold">{userName}</h5> 
             </>
           :
             <>
-              <Link className="p-2 rounded-lg text-md hover:opacity-80 duration-300 text-center" href={'/sign_in'}>Sign in to your account</Link>
+              <Link className="p-2 rounded-lg text-md hover:opacity-80 duration-300 text-center font-bold" href={'/sign_in'}>Sign in to your account</Link>
             </>
           }
-          <Cart></Cart>
+          <div className="relative mt-4 text-sm">
+            <div className="fixed right-10 bg-red-500 rounded-full px-2 font-bold hover:cursor-pointer" onClick={() => cartClicked ? setCartClicked(false) : setCartClicked(true)}>
+              {cartCounter}
+            </div>
+          </div>
+          <div className="flex flex-col items-center">
+            <ShoppingBasket onClick={() => cartClicked ? setCartClicked(false) : setCartClicked(true)} className="hover:cursor-pointer" size={50} strokeWidth={1} />
+            {cartClicked &&
+              <Cart />
+            }
+          </div>
         </div>
       </nav>
     </header>
