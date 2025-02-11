@@ -10,7 +10,8 @@ export interface Product {
   category: string,
   price: number,
   model: string,
-  description: string
+  description: string,
+  quantity: number
 }
 
 export default function Home() {
@@ -27,7 +28,7 @@ export default function Home() {
 
   return (
     <div>
-      <div className="bg-gradient-to-b from-violet-400 to-neutral-200 p-10 mx-32">
+      <div className="bg-gradient-to-b from-violet-400 to-neutral-200 p-5 mx-32">
         <OfferSlider />
       </div>
       <ProductSlider products={products}/>
