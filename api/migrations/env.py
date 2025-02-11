@@ -6,6 +6,8 @@ from alembic import context
 from ecommerce.user import User
 from ecommerce.company import Company
 from ecommerce.product import Product
+from ecommerce.product import Category
+from ecommerce.product import ProductCategory
 from ecommerce.database.base import Base
 from ecommerce.database.database import database_url
 # this is the Alembic Config object, which provides

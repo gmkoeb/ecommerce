@@ -11,7 +11,6 @@ class ProductsRepository:
         self,
         company_id: int,
         name: str = "",
-        category: str = "",
         price: int = 0,
         model: str = "",
         description: str = "",
@@ -19,7 +18,6 @@ class ProductsRepository:
         new_product = Product(
             company_id=company_id,
             name=name,
-            category=category,
             price=price,
             model=model,
             description=description,

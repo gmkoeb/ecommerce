@@ -22,8 +22,3 @@ def setup_service():
 def products():
     products = service.list_products()
     return {"products": [product.to_dict() for product in products]}, 200
-
-
-@bp.route("/categories")
-def products_categories():
-    return {"categories": service.list_categories()}, 200
