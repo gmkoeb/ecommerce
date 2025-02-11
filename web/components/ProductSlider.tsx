@@ -84,7 +84,7 @@ function ProductSlider( { products }: { products: Product[] } ) {
         {products.map(product => (
           <div className="flex bg-white rounded pt-2 mb-10 w-80" key={product.id}>
             <div className="flex flex-col items-center gap-4">
-              <img className="w-44 h-32" src={`products/${product.category.toLocaleLowerCase()}.jpg`} alt="" />
+              <img className="w-44 h-32" src={`products/${product.name.split(" ").join("_").toLocaleLowerCase()}.jpg`} alt={`${product.name}`} />
               <div className="flex flex-col text-left gap-4">
                 <h5 className="font-bold">{product.name} - {product.model}</h5>
                 <div>

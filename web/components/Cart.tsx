@@ -21,7 +21,7 @@ export default function Cart(){
           {cart.map((product) => (
             <div className="grid grid-cols-2 border-b mb-4 items-center" key={product.id}>
               <div className="flex items-center gap-2">
-                <img width={60} src={`/products/${product.category.toLocaleLowerCase()}.jpg`} alt="" />
+                <img width={60} src={`products/${product.name.split(" ").join("_").toLocaleLowerCase()}.jpg`} alt={`${product.name}`} />
                 <h3>{product.name} - {product.model}</h3>
               </div>
               <div className="flex flex-col gap-2">
