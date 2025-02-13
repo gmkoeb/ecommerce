@@ -1,7 +1,6 @@
 from ecommerce.category import Category
 from sqlalchemy.orm import Session
 
-
 class CategoriesRepository:
     def __init__(self, db: Session):
         self.__db = db
@@ -21,7 +20,9 @@ class CategoriesRepository:
             except Exception:
                 self.__db.rollback()
             raise
-
+    def find_category_by_name(self, name: str) -> Category:
+        return self.__db.query(Category).filter(Category.name==name).first()
+    
     def list_categories(self) -> list[Category]:
         categories = self.__db.query(Category).all()
         return categories
