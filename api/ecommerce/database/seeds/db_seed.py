@@ -137,11 +137,15 @@ def seed():
         company = companies_repository.create_company(**company_data)
 
     for product_data in products_data:
-        filtered_product_data = {k: v for k, v in product_data.items() if k != "category"}
+        filtered_product_data = {
+            k: v for k, v in product_data.items() if k != "category"
+        }
         category_name = product_data.get("category")
 
         try:
-            product = products_repository.create_product(company_id=company.id, **filtered_product_data)
+            product = products_repository.create_product(
+                company_id=company.id, **filtered_product_data
+            )
         except Exception as e:
             print(f"Error creating product '{product_data['name']}': {e}")
             continue
@@ -150,12 +154,17 @@ def seed():
             category = categories_repository.create_category(name=category_name)
         except Exception:
             category = categories_repository.find_category_by_name(name=category_name)
-        
+
         try:
-            product_categories_repository.create_product_category(product=product, category=category)
+            product_categories_repository.create_product_category(
+                product=product, category=category
+            )
         except Exception as e:
-            print(f"Error linking product '{product_data['name']}' with category '{category_name}': {e}")
+            print(
+                f"Error linking product '{product_data['name']}' with category '{category_name}': {e}"
+            )
             continue
+
 
 if __name__ == "__main__":
     from ecommerce import app
