@@ -22,6 +22,9 @@ class CategoriesRepository:
                 self.__db.rollback()
             raise
 
+    def find_category_by_name(self, name: str) -> Category | None:
+        return self.__db.query(Category).filter(Category.name == name).first()
+
     def list_categories(self) -> list[Category]:
         categories = self.__db.query(Category).all()
         return categories

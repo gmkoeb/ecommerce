@@ -20,6 +20,13 @@ def test_db():
         db.close()
         Base.metadata.drop_all(bind=engine)
 
+@pytest.fixture(autouse=True)
+def setup_db_environment(test_db):
+    from ecommerce import app
+
+    with app.test_client():
+        app.config["DB_SESSION"] = test_db
+        yield
 
 @pytest.fixture()
 def users_service(test_db):
