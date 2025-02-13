@@ -12,7 +12,7 @@ export default function Cart(){
   }, [cart])
 
   return(
-    <div className="px-2 border border-gray-400 rounded-md bg-white absolute mt-14 w-96 text-center right-4 text-black">
+    <div className="px-2 border border-gray-400 rounded-md bg-white absolute mt-14 w-96 max-h-96 text-center right-4 text-black overflow-auto">
       <h2 className="mb-2 font-bold text-lg">My Cart</h2>
       {cart.length === 0 ? (
         <p>Cart is empty</p>
