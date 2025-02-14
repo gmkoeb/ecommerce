@@ -29,3 +29,16 @@ class Company(Base):
             "email": "Email can't be blank.",
             "registration_number": "Registration number can't be blank.",
         }
+
+    def to_dict(self) -> dict[str, str]:
+        """Converts an Company instance into a dictionary"""
+        return {
+            "id": str(self.id),
+            "corporate_name": str(self.corporate_name),
+            "brand_name": str(self.brand_name),
+            "full_address": str(self.full_address),
+            "city": str(self.city),
+            "state": str(self.state),
+            "email": str(self.email),
+            "registration_number": str(self.registration_number),
+        }

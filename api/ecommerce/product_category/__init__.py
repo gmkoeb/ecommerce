@@ -1,6 +1,6 @@
 from sqlalchemy import Column, ForeignKey, Integer
+from ecommerce.database.database import get_db
 from ecommerce.database.base import Base
-from sqlalchemy.orm import Session
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -21,19 +21,12 @@ class ProductCategory(Base):
 
     def product(self) -> "Product | None":
         from ecommerce.product import Product
-        from ecommerce import app
-        from flask import current_app
 
-        with app.app_context():
-            db: Session = current_app.config["DB_SESSION"]
-            return db.get(Product, self.product_id)
+        db_session = get_db()
+        return db_session.get(Product, self.product_id)
 
     def category(self) -> "Category | None":
         from ecommerce.category import Category
-        from ecommerce import app
-        from flask import current_app
 
-        with app.app_context():
-            db: Session = current_app.config["DB_SESSION"]
-
-            return db.get(Category, self.category_id)
+        db_session = get_db()
+        return db_session.get(Category, self.category_id)
