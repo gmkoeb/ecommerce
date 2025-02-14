@@ -12,15 +12,15 @@ class UsersRepository:
         """Inserts a user into the database"""
         new_user = User(name=name, email=email, password=password)
 
-        if self.find_user_by_email(email=new_user.email):
-            new_user.errors.append('Email already in use')
+        if self.find_user_by_email(email=str(new_user.email)):
+            new_user.errors.append("Email already in use")
             return new_user
-        
+
         self.__db.add(new_user)
         self.__db.commit()
         self.__db.refresh(new_user)
         return new_user
-    
+
     def list_users(self) -> list[User]:
         """List all registered users"""
         users = self.__db.query(User).all()
