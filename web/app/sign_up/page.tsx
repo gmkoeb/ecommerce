@@ -2,6 +2,8 @@
 import { ErrorMessage, Field, Form, Formik, FormikErrors, FormikHelpers } from "formik";
 import { api } from "../../lib/axios";
 import { AxiosResponse } from "axios";
+import { useState } from "react";
+import { useRouter } from 'next/navigation'
 
 interface SignUpFormValues {
   name: string,
@@ -11,6 +13,8 @@ interface SignUpFormValues {
 }
 
 export default function SignUp() {
+  const [apiErrors, setApiErrors] = useState<string[]>([])
+  const router = useRouter()
   const initialValues: SignUpFormValues = {
     email: '',
     name: '',
@@ -28,12 +32,12 @@ export default function SignUp() {
         }
 
       }
-      const response = await api.post<AxiosResponse>('/sign_up', userData)
-      console.log(response)
+      await api.post<AxiosResponse>('/sign_up', userData)
       actions.setSubmitting(false)
+      router.refresh()
+      router.push('/sign_in')
     } catch (error: any) {
-      console.log(error.response.data.error)
-
+      setApiErrors(error.response.data.errors)
     }
   }
 
@@ -68,6 +72,16 @@ export default function SignUp() {
       >
         {({ errors, touched }) => (
           <Form className="flex flex-col mt-20 justify-center gap-6 text-left ml-40">
+            {apiErrors.length > 0 &&
+                <>
+                  {apiErrors.map(error => (
+                    <div className="flex flex-col gap-2 mt-10 border border-red-500 w-1/2 items-center rounded" key={error}>
+                      <h3 className="text-lg font-bold text-center">There was an error while creating your account:</h3>
+                      <p className="text-red-500 font-bold">*{error}</p>
+                    </div>
+                  ))}
+                </>
+              }
             <h1 className="text-5xl text-left font-bold">Sign up</h1>
             <div className="w-1/2 flex flex-col">
               <div className="flex justify-between">
