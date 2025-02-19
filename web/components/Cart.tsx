@@ -3,7 +3,7 @@ import { Minus, Plus, Trash, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function Cart(){
-  const { cart, removeFromCart, addToCart, removeOneFromCart, removeAll } = useCart()
+  const { cart, addToCart, removeOneFromCart, removeAll } = useCart()
   const [total, setTotal] = useState(0)
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function Cart(){
           {cart.map((product) => (
             <div className="grid grid-cols-2 border-b mb-4 items-center" key={product.id}>
               <div className="flex items-center gap-2">
-                <img width={60} src={`${product.name.split(" ").join("_").toLocaleLowerCase()}.png`} alt={`${product.name}`} />
+                <img width={60} src={`products/${product.name.split(" ").join("_").toLocaleLowerCase()}.png`} alt={`${product.name}`} />
                 <h3>{product.name} - {product.model}</h3>
               </div>
               <div className="flex flex-col gap-2">

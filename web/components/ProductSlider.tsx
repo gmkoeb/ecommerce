@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from "react";
+import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -21,7 +21,7 @@ function ProductSlider( { products }: { products: Product[] } ) {
         strokeWidth={0.5}
         fill="white"
         size={40}
-        style={{ display: "absolute", right: "-50", marginRight: "10px" }}
+        style={{ display: "absolute", right: "-55", marginRight: "10px", width: "40px", height: "40px" }}
         onClick={onClick}
       />
     );
@@ -36,7 +36,7 @@ function ProductSlider( { products }: { products: Product[] } ) {
         fill="white"
         strokeWidth={0.5} 
         size={40}
-        style={{ display: "absolute", left: "-50", zIndex: "10", marginLeft: "10px" }}
+        style={{ display: "absolute", left: "-50", zIndex: "10", marginLeft: "10px", width: "40px", height: "40px" }}
         onClick={onClick}
       />
     );
@@ -82,7 +82,7 @@ function ProductSlider( { products }: { products: Product[] } ) {
     <div className="slider-container mt-10 mx-32">
       <Slider {...settings}>
         {products.map(product => (
-          <div className="flex bg-white rounded pt-2 mb-10 w-80" key={product.id}>
+          <div className="flex bg-white rounded pt-2 mb-10" key={product.id}>
             <Link href={`/products/${product.id}`} className="flex flex-col items-center gap-4">
               <img className="w-44 h-32" src={`products/${product.name.split(" ").join("_").toLocaleLowerCase()}.png`} alt={`${product.name}`} />
               <div className="flex flex-col text-left gap-4">
