@@ -1,11 +1,12 @@
 'use client'
-import React, { useState } from "react";
+import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Product } from "@/app/page";
 import { CircleChevronLeft, CircleChevronRight, ShoppingCart } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import Link from "next/link";
 
 function ProductSlider( { products }: { products: Product[] } ) {
   const { addToCart } = useCart();
@@ -20,7 +21,7 @@ function ProductSlider( { products }: { products: Product[] } ) {
         strokeWidth={0.5}
         fill="white"
         size={40}
-        style={{ display: "absolute", right: "-50", marginRight: "10px" }}
+        style={{ display: "absolute", right: "-55", marginRight: "10px", width: "40px", height: "40px" }}
         onClick={onClick}
       />
     );
@@ -35,7 +36,7 @@ function ProductSlider( { products }: { products: Product[] } ) {
         fill="white"
         strokeWidth={0.5} 
         size={40}
-        style={{ display: "absolute", left: "-50", zIndex: "10", marginLeft: "10px" }}
+        style={{ display: "absolute", left: "-50", zIndex: "10", marginLeft: "10px", width: "40px", height: "40px" }}
         onClick={onClick}
       />
     );
@@ -44,7 +45,6 @@ function ProductSlider( { products }: { products: Product[] } ) {
   const settings = {
     dots: false,
     speed: 500,
-    autoplay: false,
     slidesToShow: 5,
     slidesToScroll: 1,
     swipe: false,
@@ -82,9 +82,9 @@ function ProductSlider( { products }: { products: Product[] } ) {
     <div className="slider-container mt-10 mx-32">
       <Slider {...settings}>
         {products.map(product => (
-          <div className="flex bg-white rounded pt-2 mb-10 w-80" key={product.id}>
-            <div className="flex flex-col items-center gap-4">
-              <img className="w-44 h-32" src={`products/${product.name.split(" ").join("_").toLocaleLowerCase()}.jpg`} alt={`${product.name}`} />
+          <div className="flex bg-white rounded pt-2 mb-10" key={product.id}>
+            <Link href={`/products/${product.id}`} className="flex flex-col items-center gap-4">
+              <img className="w-44 h-32" src={`products/${product.name.split(" ").join("_").toLocaleLowerCase()}.png`} alt={`${product.name}`} />
               <div className="flex flex-col text-left gap-4">
                 <h5 className="font-bold">{product.name} - {product.model}</h5>
                 <div>
@@ -93,12 +93,12 @@ function ProductSlider( { products }: { products: Product[] } ) {
                 </div>
                 <p>{product.model}</p>
               </div>
-              <div
-                onClick={() => addToCart(product)} 
-                className="flex gap-3 text-white font-bold bg-orange-500 py-2 w-full items-center justify-center rounded-b hover:cursor-pointer hover:opacity-85 duration-300">
-                <p>Add to cart</p>
-                <ShoppingCart/>
-              </div>
+            </Link>
+            <div
+              onClick={() => addToCart(product)} 
+              className="flex gap-3 text-white font-bold bg-orange-500 py-2 w-full items-center justify-center rounded-b hover:cursor-pointer hover:opacity-85 duration-300 mt-2">
+              <p>Add to cart</p>
+              <ShoppingCart/>
             </div>
           </div>
         ))}

@@ -10,3 +10,6 @@ class ProductsService:
 
     def list_categories(self):
         return self.__repository.list_categories()
+
+    def get_product(self, id):
+        return self.__repository.get_product(id=id)

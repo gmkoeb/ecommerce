@@ -40,6 +40,10 @@ class ProductsRepository:
         products = self.__db.query(Product).all()
         return products
 
+    def get_product(self, id) -> Product | None:
+        product = self.__db.get(Product, id)
+        return product
+
     def list_categories(self):
         categories = self.__db.query(Product.category).distinct().all()
         return [category[0] for category in categories]

@@ -26,7 +26,6 @@ def sign_up():
     email = user_data["email"]
     user = service.create_user(name=name, password=password, email=email)
     if len(user.errors) > 0:
-        print(f"User errors: : ${user.errors}")
         return {"errors": user.errors}, 400
     else:
         return {"user": user.to_dict()}, 201

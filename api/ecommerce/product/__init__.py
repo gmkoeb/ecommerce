@@ -1,4 +1,5 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
+from ecommerce.database.database import get_db
 from ecommerce.database.base import Base
 from sqlalchemy.orm import relationship
 from ecommerce.company import Company as Company
@@ -28,7 +29,7 @@ class Product(Base):
             "price": "Price can't be blank.",
         }
 
-    def to_dict(self) -> dict[str, str]:
+    def to_dict(self) -> dict[str, str | dict[str, str]]:
         """Converts an Product instance into a dictionary"""
         return {
             "id": str(self.id),
@@ -36,4 +37,12 @@ class Product(Base):
             "price": str(self.price),
             "model": str(self.model),
             "description": str(self.description),
+            "company": self.get_company().to_dict(),
         }
+
+    def get_company(self) -> Company:
+        db_session = get_db()
+        company = db_session.get(Company, self.company_id)
+        assert company is not None, "Company not found"
+
+        return company
