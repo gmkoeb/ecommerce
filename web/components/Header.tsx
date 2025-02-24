@@ -71,7 +71,7 @@ export default function Header() {
           <div className="relative mt-4 text-sm">
             <div
               className="fixed right-10 bg-red-500 rounded-full px-2 font-bold hover:cursor-pointer"
-              onClick={() =>
+              onKeyDown={() =>
                 cartClicked ? setCartClicked(false) : setCartClicked(true)
               }
             >
