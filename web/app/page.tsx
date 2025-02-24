@@ -1,37 +1,31 @@
-'use client'
-import OfferSlider from "@/components/OfferSlider";
-import ProductSlider from "@/components/ProductSlider";
-import { api } from "@/lib/axios";
-import { useEffect, useState } from "react";
+import OfferSlider from '@/components/OfferSlider'
+import ProductSlider from '@/components/ProductSlider'
+import { api } from '@/lib/axios'
 
 export interface Product {
-  id: number,
-  name: string,
-  category: string,
-  price: number,
-  model: string,
-  description: string,
+  id: number
+  name: string
+  category: string
+  price: number
+  model: string
+  description: string
   quantity: number
 }
 
-export default function Home() {
-  const [products, setProducts] = useState<Product[]>([])
+interface GetProductsResponse {
+  products: Product[]
+}
 
-  async function getProducts(){
-    const response = await api.get('/products')
-    setProducts(response.data.products)
-  }
-
-  useEffect(() => {
-    getProducts()
-  }, [])
+export default async function Home() {
+  const response = await api.get<GetProductsResponse>('/products')
+  const { products } = response.data
 
   return (
     <div>
       <div className="bg-gradient-to-b from-violet-400 to-neutral-200 p-5 mx-32">
         <OfferSlider />
       </div>
-      <ProductSlider products={products}/>
+      <ProductSlider products={products} />
     </div>
-  );
+  )
 }
