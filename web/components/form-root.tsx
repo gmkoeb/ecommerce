@@ -1,4 +1,3 @@
-'use client'
 import { Form, type FormikFormProps, type FormikHelpers } from 'formik'
 import { FormErrors } from './form-errors'
 
