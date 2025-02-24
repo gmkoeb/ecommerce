@@ -74,6 +74,9 @@ export default function Header() {
               onKeyDown={() =>
                 cartClicked ? setCartClicked(false) : setCartClicked(true)
               }
+              onClick={() =>
+                cartClicked ? setCartClicked(false) : setCartClicked(true)
+              }
             >
               {cartCounter}
             </div>

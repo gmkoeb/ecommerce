@@ -1,7 +1,7 @@
 'use client'
 
-import { FormInput } from '@/components/form-input'
-import { FormRoot, type FormValues } from '@/components/form-root'
+import { FormInput } from '@/components/Form/form-input'
+import { FormRoot, type FormValues } from '@/components/Form/form-root'
 import { api } from '@/lib/axios'
 import { AxiosError, type AxiosResponse } from 'axios'
 import { Formik, type FormikErrors, type FormikHelpers } from 'formik'
