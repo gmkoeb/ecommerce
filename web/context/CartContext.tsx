@@ -1,5 +1,5 @@
 'use client'
-import { Product } from "@/app/page";
+import { Product } from "@/app/(home)/page";
 import { createContext, useContext, useEffect, useState } from "react";
 
 

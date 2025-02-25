@@ -40,4 +40,4 @@ def sign_in():
             "user": {"name": user.name, "token": service.generate_jwt(user_id=user.id)}
         }, 200
     else:
-        return {"error": "Authentication failed: Wrong email or password"}, 400
+        return {"errors": ["Authentication failed: Wrong email or password"]}, 400
