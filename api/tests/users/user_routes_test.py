@@ -66,5 +66,5 @@ class TestUserRoutes:
         assert response.status_code == 400
 
         assert (
-            json_response["error"] == "Authentication failed: Wrong email or password"
+            "Authentication failed: Wrong email or password" in json_response["errors"]
         )
