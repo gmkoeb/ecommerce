@@ -1,38 +1,26 @@
 'use client'
-import React, { type ComponentProps } from 'react'
+import type { ComponentProps } from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import type { Product } from '@/app/page'
-import { useCart } from '@/context/CartContext'
-import {
-  CircleChevronLeft,
-  CircleChevronRight,
-  ShoppingCart,
-} from 'lucide-react'
-import Link from 'next/link'
+import type { Product } from '@/app/(home)/page'
+import { AddToCartButton } from '@/components/add-to-cart-button'
+import { CircleChevronLeft, CircleChevronRight } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
+import { twMerge } from 'tailwind-merge'
 
 function ProductSlider({ products }: { products: Product[] }) {
-  const { addToCart } = useCart()
-
   function SampleNextArrow(props: ComponentProps<'button'>) {
     const { className, onClick } = props
     return (
       <button type="button" onClick={onClick}>
         <CircleChevronRight
-          className={className}
+          className={twMerge('!w-10 !h-10 z-10 -mr-5', className)}
           color="gray"
           strokeWidth={0.5}
           fill="white"
           size={40}
-          style={{
-            display: 'absolute',
-            right: '-55',
-            marginRight: '10px',
-            width: '40px',
-            height: '40px',
-          }}
         />
       </button>
     )
@@ -43,19 +31,10 @@ function ProductSlider({ products }: { products: Product[] }) {
     return (
       <button type="button" onClick={onClick}>
         <CircleChevronLeft
-          className={className}
+          className={twMerge('!w-10 !h-10 z-10 -ml-4', className)}
           color="gray"
           fill="white"
           strokeWidth={0.5}
-          size={40}
-          style={{
-            display: 'absolute',
-            left: '-50',
-            zIndex: '10',
-            marginLeft: '10px',
-            width: '40px',
-            height: '40px',
-          }}
         />
       </button>
     )
@@ -109,7 +88,7 @@ function ProductSlider({ products }: { products: Product[] }) {
               <Image
                 width={180}
                 height={120}
-                className='w-44 h-32'
+                className="w-44 h-32"
                 src={`/products/${product.name.split(' ').join('_').toLocaleLowerCase()}.png`}
                 alt={`${product.name}`}
               />
@@ -129,14 +108,10 @@ function ProductSlider({ products }: { products: Product[] }) {
                 <p>{product.model}</p>
               </div>
             </Link>
-            <div
-              onKeyDown={() => addToCart(product)}
-              onClick={() => addToCart(product)}
+            <AddToCartButton
+              product={product}
               className="flex gap-3 text-white font-bold bg-orange-500 py-2 w-full items-center justify-center rounded-b hover:cursor-pointer hover:opacity-85 duration-300 mt-2"
-            >
-              <p>Add to cart</p>
-              <ShoppingCart />
-            </div>
+            />
           </div>
         ))}
       </Slider>

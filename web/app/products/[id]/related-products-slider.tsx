@@ -1,11 +1,13 @@
-import type { Product } from '@/app/page'
+'use client'
+
+import type { Product } from '@/app/(home)/page'
 import { CircleChevronLeft, CircleChevronRight } from 'lucide-react'
 import React from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
 
 function RelatedProductsSlider({ products }: { products: Product[] }) {
   function SampleNextArrow(props: any) {

@@ -5,7 +5,7 @@ import { ShoppingBasket } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import Cart from './Cart'
+import Cart from './cart'
 
 export default function Header() {
   const router = useRouter()

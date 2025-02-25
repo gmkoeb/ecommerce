@@ -1,5 +1,5 @@
-import OfferSlider from '@/components/OfferSlider'
-import ProductSlider from '@/components/ProductSlider'
+import OfferSlider from '@/app/(home)/offer-slider'
+import ProductSlider from '@/app/(home)/product-slider'
 import { api } from '@/lib/axios'
 
 export interface Product {

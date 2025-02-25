@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import Header from '@/components/Header'
+import Header from '@/components/header'
 import CartProvider from '@/context/CartContext'
 import { Kanit, Montserrat } from 'next/font/google'
 
