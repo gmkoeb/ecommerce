@@ -11,6 +11,7 @@ import {
   ShoppingCart,
 } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 function ProductSlider({ products }: { products: Product[] }) {
   const { addToCart } = useCart()
@@ -105,9 +106,11 @@ function ProductSlider({ products }: { products: Product[] }) {
               href={`/products/${product.id}`}
               className="flex flex-col items-center gap-4"
             >
-              <img
-                className="w-44 h-32"
-                src={`products/${product.name.split(' ').join('_').toLocaleLowerCase()}.png`}
+              <Image
+                width={180}
+                height={120}
+                className='w-44 h-32'
+                src={`/products/${product.name.split(' ').join('_').toLocaleLowerCase()}.png`}
                 alt={`${product.name}`}
               />
               <div className="flex flex-col text-left gap-4">

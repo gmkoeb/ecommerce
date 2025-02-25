@@ -3,6 +3,7 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import type { ComponentProps } from 'react'
+import Image from 'next/image'
 
 function OfferSlider() {
   function SampleNextArrow(props: ComponentProps<'button'>) {
@@ -58,9 +59,11 @@ function OfferSlider() {
       <Slider {...settings}>
         {sliderArray.map(value => (
           <div key={value}>
-            <img
-              className="w-full h-96 mx-auto rounded-lg shadow-md"
-              src={`sliderImages/${value}.jpeg`}
+            <Image
+              width={600}
+              height={400}
+              className="mx-auto rounded-lg shadow-md"
+              src={`/offerSliderImages/${value}.jpeg`}
               alt={`${value} products`}
             />
           </div>

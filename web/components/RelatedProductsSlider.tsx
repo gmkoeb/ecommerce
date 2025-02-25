@@ -5,6 +5,7 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Link from 'next/link'
+import Image from 'next/image'
 
 function RelatedProductsSlider({ products }: { products: Product[] }) {
   function SampleNextArrow(props: any) {
@@ -59,7 +60,9 @@ function RelatedProductsSlider({ products }: { products: Product[] }) {
               href={`/products/${product.id}`}
               className="flex flex-col items-center text-center font-bold"
             >
-              <img
+              <Image
+                width={80}
+                height={80}
                 className="w-30 h-20"
                 src={`/products/${product.name.split(' ').join('_').toLocaleLowerCase()}.png`}
                 alt={`${product.name}`}

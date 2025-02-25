@@ -6,6 +6,7 @@ import { api } from '@/lib/axios'
 import { NotebookText, ShoppingCart, Tag, Truck } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import RelatedProductsSlider from './RelatedProductsSlider'
+import Image from 'next/image'
 
 interface ProductParams {
   id: string
@@ -65,9 +66,11 @@ export default function ProductDetails({ id }: ProductParams) {
             {product?.name} - {product?.model}
           </h3>
           <p className="mt-5">{product?.company.brand_name}</p>
-          <img
-            className="w-1/3 mx-auto mt-10 rounded-lg"
-            src={`${product?.name.split(' ').join('_').toLocaleLowerCase()}.png`}
+          <Image
+            width={400}
+            height={300}
+            className="mx-auto mt-10 rounded-lg"
+            src={`/products/${product?.name.split(' ').join('_').toLocaleLowerCase()}.png`}
             alt={`${product?.name}`}
           />
         </div>

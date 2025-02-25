@@ -1,5 +1,6 @@
 import { useCart } from '@/context/CartContext'
 import { Minus, Plus, Trash2 } from 'lucide-react'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 export default function Cart() {
@@ -17,7 +18,7 @@ export default function Cart() {
 
   return (
     <div className="px-2 border border-gray-400 rounded-md bg-white absolute mt-14 w-96 max-h-96 text-center right-4 text-black overflow-auto">
-      <h2 className="mb-2 font-bold text-lg">My Cart</h2>
+      <h2 className="mb-2 font-semibold text-2xl font-heading">My Cart</h2>
       {cart.length === 0 ? (
         <p>Cart is empty</p>
       ) : (
@@ -28,9 +29,10 @@ export default function Cart() {
               key={product.id}
             >
               <div className="flex items-center gap-2">
-                <img
+                <Image
                   width={60}
-                  src={`products/${product.name.split(' ').join('_').toLocaleLowerCase()}.png`}
+                  height={60}
+                  src={`/products/${product.name.split(' ').join('_').toLocaleLowerCase()}.png`}
                   alt={`${product.name}`}
                 />
                 <h3>
