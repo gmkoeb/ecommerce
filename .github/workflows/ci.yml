@@ -25,29 +25,29 @@ jobs:
       with:
         python-version: "3.10"
 
+    - name: Install uv
+      uses: astral-sh/setup-uv@v5
+
     - name: Install dependencies
-      working-directory: ./api
-      run: |
-        pip install -r requirements.txt
-        pip install -r requirements-dev.txt
+      run: uv sync
 
     - name: Check linting with ruff
       working-directory: ./api
       run: |
-        ruff check ecommerce
+        uv run ruff check ecommerce
 
     - name: Check code formatting with black
       working-directory: ./api
       run: |
-        black --check ecommerce
+        uv run black --check ecommerce
 
     - name: Check typing with mypy
       working-directory: ./api
       run: |
-        mypy ecommerce
+        uv run mypy ecommerce
         
     - name: Test with pytest
       working-directory: ./api
       run: |
-        pytest
+        uv run pytest
         
